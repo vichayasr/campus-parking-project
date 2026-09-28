@@ -255,7 +255,7 @@ Rules between modules:
 |---|---|---|
 | Role | Single source of truth | Helper only; can be rebuilt |
 | Stores | All business state and history | Event fan-out between instances (pub/sub); optional availability cache |
-| Used for check-in decision | ✅ Always | ❌ Never |
+| Used for check-in decision | Always |  Never |
 | If data is lost | Real damage | Nothing lost; rebuilt from PostgreSQL |
 
 ## 6.7 Behavior when Redis is down
@@ -311,7 +311,7 @@ with its own deployment.
 | Consistency | Business change and audit in one transaction; events after commit in the same process | Same for writes; events always depend on Redis | Check-in and audit may span services; needs distributed transactions or eventual consistency |
 | Observability | One log stream, easy to trace a request | Two log streams; need correlation IDs | Distributed tracing required |
 | Scaling | Scale the whole app; enough for campus load | Scale WebSocket separately | Scale each service separately |
-| Intern project fit | ✅ Best | ⚠️ Possible later | ❌ Too much overhead |
+| Intern project fit |  Best |  Possible later |  Too much overhead |
 
 **Why not B now:** separate scaling of WebSocket connections is not
 needed at campus scale. Because the `realtime` module already has a
